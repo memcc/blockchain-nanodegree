@@ -1,0 +1,28 @@
+{
+  "name": "1-blockchain-api",
+  "version": "1.0.0",
+  "description": "This project creates a Blockchain application to store data into the blocks",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "author": "Mike Espana",
+  "license": "ISC",
+  "dependencies": {
+    "bitcoinjs-lib": "^4.0.3",
+    "bitcoinjs-message": "^2.0.0",
+    "body-parser": "^1.18.3",
+    "crypto-js": "^4.1.1",
+    "express": "^4.16.4",
+    "hex2ascii": "0.0.3",
+    "lodash": "^4.17.21",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "nodemon": "^2.0.15"
+  }
+}
