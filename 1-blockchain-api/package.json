@@ -4,9 +4,9 @@
   "description": "This project creates a Blockchain application to store data into the blocks",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./src",
-    "dev": "nodemon src/app.js",
-    "start": "node src/app.js"
+    "lint": "eslint ./",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "Mike Espana",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "crypto-js": "^4.1.1",
     "express": "^4.16.4",
     "hex2ascii": "0.0.3",
+    "lodash": "^4.17.21",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
