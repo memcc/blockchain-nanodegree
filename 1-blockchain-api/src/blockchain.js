@@ -56,6 +56,14 @@ class Blockchain {
    * that this method is a private method.
    */
   async _addBlock(block) {
+    const chainErrors = await this.validateChain();
+
+    console.log({ chainErrors });
+
+    if (chainErrors.length > 0) {
+      throw new Error('Chain invalid, cannot add new block');
+    }
+
     const hash = await SHA256(JSON.stringify(block)).toString()
     const height = this.chain.length
     const previousBlock = this.chain[height - 1]
@@ -182,26 +190,29 @@ class Blockchain {
     const errors = []
 
     for (const currentBlock of this.chain) {
+      if (currentBlock.height === 0) {
+        // Skip validation as is genesis block
+        break
+      }
+
       const blockValid = await currentBlock.validate()
 
       if (!blockValid) {
         errors.push(
-          new Error(`Invalid block at ${block.height}: ${block.hash}`)
+          new Error(`Invalid block at ${currentBlock.height}: ${currentBlock.hash}`)
         )
       }
 
-      if (currentBlock.height > 0) {
-        const previousBlock = await this.getBlockByHeight(
-          currentBlock.height - 1
-        )
+      const previousBlock = await this.getBlockByHeight(
+        currentBlock.height - 1
+      )
 
-        if (currentBlock.previousBlockHash !== previousBlock.hash) {
-          errors.push(
-            new Error(
-              `Invalid block detected between Block ${currentBlock.height} / Block ${previousBlock.height}`
-            )
+      if (currentBlock.previousBlockHash !== previousBlock.hash) {
+        errors.push(
+          new Error(
+            `Invalid block detected between Block ${currentBlock.height} / Block ${previousBlock.height}`
           )
-        }
+        )
       }
     }
 
