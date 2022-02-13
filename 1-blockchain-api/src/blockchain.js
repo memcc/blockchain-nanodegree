@@ -56,12 +56,10 @@ class Blockchain {
    * that this method is a private method.
    */
   async _addBlock(block) {
-    const chainErrors = await this.validateChain();
-
-    console.log({ chainErrors });
+    const chainErrors = await this.validateChain()
 
     if (chainErrors.length > 0) {
-      throw new Error('Chain invalid, cannot add new block');
+      throw new Error('Chain invalid, cannot add new block')
     }
 
     const hash = await SHA256(JSON.stringify(block)).toString()
@@ -199,13 +197,13 @@ class Blockchain {
 
       if (!blockValid) {
         errors.push(
-          new Error(`Invalid block at ${currentBlock.height}: ${currentBlock.hash}`)
+          new Error(
+            `Invalid block at ${currentBlock.height}: ${currentBlock.hash}`
+          )
         )
       }
 
-      const previousBlock = await this.getBlockByHeight(
-        currentBlock.height - 1
-      )
+      const previousBlock = await this.getBlockByHeight(currentBlock.height - 1)
 
       if (currentBlock.previousBlockHash !== previousBlock.hash) {
         errors.push(
