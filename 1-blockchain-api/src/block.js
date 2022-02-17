@@ -33,7 +33,8 @@ class Block {
    *  Note: to access the class values inside a Promise code you need to create an auxiliary value `let self = this;`
    */
   async validate() {
-    const currentHash = this.hash;
+    const self = this;
+    const currentHash = self.hash;
     const calculatedHash = await SHA256(JSON.stringify({ ...self, hash: null })).toString()
 
     return currentHash === calculatedHash;
