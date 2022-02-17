@@ -1,6 +1,7 @@
 # Steps to run app
-1. Clone the project and run `npm install`
-2. Run `npm start` 🎉 
+1. Ensure that you have the latest NodeJS LTS installed (currently 16.14.0)
+2. Clone the project and run `npm install`
+3. Run `npm start` 🎉 
 
 
 # Private Blockchain brief
