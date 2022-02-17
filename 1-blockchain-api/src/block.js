@@ -33,12 +33,10 @@ class Block {
    *  Note: to access the class values inside a Promise code you need to create an auxiliary value `let self = this;`
    */
   async validate() {
-    let self = this
-    const hash = self.hash
+    const currentHash = this.hash;
+    const calculatedHash = await SHA256(JSON.stringify({ ...self, hash: null })).toString()
 
-    self.hash = await SHA256(JSON.stringify({ ...self, hash: null })).toString()
-
-    return hash === self.hash
+    return currentHash === calculatedHash;
   }
 
   /**
@@ -57,7 +55,7 @@ class Block {
         throw new Error('Genesis block detected');
     }
   
-    const blockData = JSON.parse(hex2ascii(body))
+    const blockData = JSON.parse(hex2ascii(self.body))
 
     return blockData
   }
